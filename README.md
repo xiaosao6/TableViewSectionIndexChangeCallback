@@ -16,7 +16,7 @@ hook UITableView内部的UITableViewIndex，实现滑动事件的监听回调
     __weak typeof(self) weakself = self;
     self.tableView.sectionIndexChanged = ^(NSInteger sectionIndex, BOOL isTracking) {
         weakself.indexIndicatorLabel.hidden = !isTracking;
-        weakself.indexIndicatorLabel.text = !isTracking ? nil : [weakself sectionIndexTitlesForTableView:weakself.tableView][sectionIndex];
+        weakself.indexIndicatorLabel.text = !isTracking ? nil : weakself.stringSource[sectionIndex];
     };
 ```
 
