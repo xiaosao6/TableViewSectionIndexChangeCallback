@@ -9,7 +9,7 @@ hook UITableView内部的UITableViewIndex，实现滑动事件的监听回调
 -------------
 
 ### 效果:
-![image](https://)
+![image](https://github.com/xiaosao6/TableViewSectionIndexChangeCallback/blob/master/indexSliding.gif)
 
 ### 示例:  
 ```oc
