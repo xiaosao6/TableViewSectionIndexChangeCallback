@@ -26,9 +26,9 @@ hook UITableView内部的UITableViewIndex，实现滑动事件的监听回调
 
 ### 原理说明
 
-- 使用Category为UITableView添加block属性
+- 使用Category为UITableView添加sectionIndexChanged block属性
 
-- 使用runtime方法替换监听了UITableViewIndex的各个触摸事件，实现监听
+- 使用Runtime方法替换了UITableViewIndex的各个触摸事件，实现监听
 
 ### 使用方法
 直接下载工程，拷贝UITableView+IndexPan.h与.m文件，*#import "UITableView+IndexPan.h"* 即可使用
