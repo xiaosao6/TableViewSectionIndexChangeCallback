@@ -26,7 +26,7 @@
     __weak typeof(self) weakself = self;
     self.tableView.sectionIndexChanged = ^(NSInteger sectionIndex, BOOL isTracking) {
         weakself.indexIndicatorLabel.hidden = !isTracking;
-        weakself.indexIndicatorLabel.text = !isTracking ? nil : [weakself sectionIndexTitlesForTableView:weakself.tableView][sectionIndex];
+        weakself.indexIndicatorLabel.text = !isTracking ? nil : weakself.stringSource[sectionIndex];
     };
 }
 
