@@ -12,17 +12,18 @@
 static void *indexPanBlkKey = &indexPanBlkKey;
 static NSString *selectedSectionKey = @"selectedSection";
 
-
 @implementation UITableView (IndexPan)
 
 +(void)load{
-    [super load];
-    method_exchangeImplementations(class_getInstanceMethod(self.class, NSSelectorFromString(@"_sectionIndexTouchesBegan:")),
-                                   class_getInstanceMethod(self.class, @selector(cc_swizzling_sectionIndexTouchesBegan:Event:)));
-    method_exchangeImplementations(class_getInstanceMethod(self.class, NSSelectorFromString(@"_sectionIndexChanged:")),
-                                   class_getInstanceMethod(self.class, @selector(cc_swizzling_sectionIndexChanged:Event:)));
-    method_exchangeImplementations(class_getInstanceMethod(self.class, NSSelectorFromString(@"_sectionIndexTouchesEnded:")),
-                                   class_getInstanceMethod(self.class, @selector(cc_swizzling_sectionIndexTouchesEnded:Event:)));
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        method_exchangeImplementations(class_getInstanceMethod(self.class, NSSelectorFromString(@"_sectionIndexTouchesBegan:")),
+                                       class_getInstanceMethod(self.class, @selector(cc_swizzling_sectionIndexTouchesBegan:Event:)));
+        method_exchangeImplementations(class_getInstanceMethod(self.class, NSSelectorFromString(@"_sectionIndexChanged:")),
+                                       class_getInstanceMethod(self.class, @selector(cc_swizzling_sectionIndexChanged:Event:)));
+        method_exchangeImplementations(class_getInstanceMethod(self.class, NSSelectorFromString(@"_sectionIndexTouchesEnded:")),
+                                       class_getInstanceMethod(self.class, @selector(cc_swizzling_sectionIndexTouchesEnded:Event:)));
+    });
 }
 
 -(void)cc_swizzling_sectionIndexTouchesBegan:(UIControl *)indexView Event:(UIEvent *)event{
@@ -87,7 +88,6 @@ static NSString *selectedSectionKey = @"selectedSection";
 }
 
 #pragma mark - getter/setter
-
 -(SectionIndexChangedBlock)sectionIndexChanged{
     return objc_getAssociatedObject(self, &indexPanBlkKey);
 }
